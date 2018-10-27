@@ -2,15 +2,15 @@ import { Component } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { DataService } from "../data.service";
 
-export interface PeriodicElement {
+export interface ColumnTable {
   model: string;
   number: number;
   price: number;
 }
 
 export const CONDITIONS_LIST = [
-  { value: "is-equal", label: "Is equal" },
-  { value: "is-not-equal", label: "Is not equal" }
+  { value: "is-equal", label: "Найти" },
+  { value: "is-not-equal", label: "Исключить" }
 ];
 
 export const CONDITIONS_FUNCTIONS = {
@@ -45,15 +45,15 @@ export class TableSelectsComponent {
   }
 
   private search() {
-    this.dataSource.filterPredicate = (p: PeriodicElement, filtre: any) => {
+    this.dataSource.filterPredicate = (p: ColumnTable, filter: any) => {
       let result = true;
       let keys = Object.keys(p);
 
       for (const key of keys) {
-        let searchCondition = filtre.conditions[key];
+        let searchCondition = filter.conditions[key];
 
         if (searchCondition && searchCondition !== 'none') {
-          if (filtre.methods[searchCondition](p[key], filtre.values[key]) === false) {
+          if (filter.methods[searchCondition](p[key], filter.values[key]) === false) {
             result = false;
             break;
           }
@@ -77,7 +77,7 @@ export class TableSelectsComponent {
 
   clearColumn(columnKey: string): void {
     this.searchValue[columnKey] = null;
-    this.searchCondition[columnKey] = 'none0';
+    this.searchCondition[columnKey] = 'none';
     this.applyFilter();
   }
 }
