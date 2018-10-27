@@ -9,8 +9,8 @@ export interface ColumnTable {
 }
 
 export const CONDITIONS_LIST = [
-  { value: "is-equal", label: "Найти" },
-  { value: "is-not-equal", label: "Исключить" }
+  { value: "is-equal", label: "Is equal" },
+  { value: "is-not-equal", label: "Is not equal" }
 ];
 
 export const CONDITIONS_FUNCTIONS = {
